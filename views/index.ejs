@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Task Manager App</title>
+        <style>
+            *{
+                font-family: 'lato',sans-serif;
+                font-weight: bold;
+            }
+
+            body{
+                background: rgb(245,245,245);
+                color: #555555;
+                margin-top: 20px;
+            }
+
+            .container{
+                display: block;
+                width: 350px;
+                margin: 0 auto;
+            }
+
+            li{
+                margin: 0;
+                padding: 0;
+            }
+            button{
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Task Manager</h2>
+            <form action="/addtask" method="POST">
+                <input type="text" name="newtask" placeholder="Add new task">
+                <button formaction="/addtask" type="submit">Add</button>
+                <h2>Tasks left to do -</h2>
+                <% if(task.length == 0){ %>
+                    <h4>Add task above!</h4>
+                <% } %>
+                <% for(let i=0;i<task.length;i++){ %>
+                    <li><input type="checkbox" name="check" value="<%= task[i] %>"/><%= task[i] %></li>
+                    <% } %>
+                    <br><br>
+                    <button formaction="/completetask" type="submit">Done</button>
+                    <button formaction="/removetask"  type="submit">Remove</button>
+            </form>
+            <h2>Completed tasks -</h2>
+            <% if(complete.length == 0){ %>
+                <h4>Finish your tasks!</h4>
+            <% } %>
+            <% for(let i =0;i<complete.length;i++){ %>
+                <li><input type="checkbox" checked><%= complete[i] %></li>
+                <% } %>
+                <br><br>
+            <form action="/removeall" method="POST">
+                <button formaction="/removeall" type="submit">Remove All</button>
+            </form>
+        </div>
+    </body>
+</html>
